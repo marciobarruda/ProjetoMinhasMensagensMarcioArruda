@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,20 +25,30 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> mensagens = new ArrayList<String>();
     TextView text_mensage;
     String texto;
-
+    Cursor c;
+    ArrayAdapter<String> adapter;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        text_mensage = (TextView) findViewById(R.id.text_mensage);
 
         listView = (ListView) findViewById(R.id.listview);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, mensagens);
-        listView.setAdapter(new ArrayAdapter(this, R.layout.activity_main, mensagens));
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, mensagens);
+        db = new DataBaseHandler(MainActivity.this).getWritableDatabase();
+        c = db.query("mensages", new String[]{"_id", "mensage"}, null, null, null, null, null);
+        c.moveToFirst();
+
+        while (c.moveToNext()) {
+            String id = c.getString(0);
+            texto = c.getString(1);
+            mensagens.add(texto);
+        }
         listView.setAdapter(adapter);
 
+        text_mensage = (TextView) findViewById(R.id.text_mensage);
 
         newMensage = (Button) findViewById(R.id.new_mensage);
         newMensage.setOnClickListener(new View.OnClickListener() {
@@ -50,18 +61,22 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);
                 alerta.setTitle("Nova Mensagem");
                 alerta.setView(textEntryView);
+
                 alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         texto = editText.getText().toString();
-                        mensagens.add(texto);
                         ContentValues values = new ContentValues();
-                        values.put("mensage", String.valueOf(mensagens));
-                        SQLiteDatabase db = new DataBaseHandler(MainActivity.this).getWritableDatabase();
+                        values.put("mensage", texto);
                         db.insert("mensages", null, values);
+                        mensagens.add(texto);
+
+                        adapter.notifyDataSetChanged();
+                        listView.setAdapter(adapter);
 
                         Toast.makeText(MainActivity.this, "A MENSAGEM: " + editText.getText().toString() + " FOI GRAVADA COM SUCESSO!", Toast.LENGTH_SHORT).show();
                     }
                 });
+
                 alerta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     }
@@ -71,5 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 }

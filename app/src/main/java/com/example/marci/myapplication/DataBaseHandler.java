@@ -22,13 +22,13 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_MENSAGES_TABLE = "CREATE_TABLE " + TABLE_MENSAGES + "(" + KEY_ID + " INTEGER PRIMARY KEY,"+KEY_MENSAGE+" TEXT"+")";
+        String CREATE_MENSAGES_TABLE = "CREATE TABLE " + TABLE_MENSAGES + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_MENSAGE + " TEXT" + ")";
         db.execSQL(CREATE_MENSAGES_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-db.execSQL("DROP TABLE IF EXISTS "+TABLE_MENSAGES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MENSAGES);
         onCreate(db);
     }
 }
