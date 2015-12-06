@@ -4,12 +4,16 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.CharacterPickerDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,5 +91,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, final long id) {
+
+                LayoutInflater factory = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View textEntryView = factory.inflate(R.layout.auxiliar2, null);
+                final EditText numero = (EditText) textEntryView.findViewById(R.id.editText);
+
+                AlertDialog.Builder enviar = new AlertDialog.Builder(MainActivity.this);
+                enviar.setTitle("Enviar Mensagem");
+                enviar.setView(textEntryView);
+
+                enviar.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        String telefone = numero.getText().toString();
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        String content = listView.getItemAtPosition(position).toString();
+                        intent.setType("vnd.android-dir/mms-sms");
+                        intent.putExtra("address", telefone);
+                        intent.putExtra("sms_body", content);
+                        startActivity(intent);
+                    }
+                });
+
+                enviar.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                enviar.create();
+                enviar.show();
+
+            }
+        });
     }
 }
