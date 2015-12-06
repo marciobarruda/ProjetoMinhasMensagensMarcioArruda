@@ -126,5 +126,70 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                AlertDialog.Builder editar = new AlertDialog.Builder(MainActivity.this);
+                editar.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        LayoutInflater factory = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        final View textEntryView = factory.inflate(R.layout.alert_ultima, null);
+                        final EditText edit_mensagem = (EditText) textEntryView.findViewById(R.id.new_text);
+
+                        AlertDialog.Builder ultima = new AlertDialog.Builder(MainActivity.this);
+                        ultima.setTitle("Editar Mensagem");
+                        ultima.setView(textEntryView);
+
+                        ultima.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String nova = edit_mensagem.getText().toString();
+                                ContentValues values = new ContentValues();
+                                values.put("mensage", nova);
+                                db.update("mensages", values, null, new String[]{});
+                                mensagens.add(nova);
+
+                                adapter.notifyDataSetChanged();
+                                listView.setAdapter(adapter);
+
+                                Toast.makeText(MainActivity.this, "A MENSAGEM: " + nova + " FOI GRAVADA COM SUCESSO!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        ultima.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        ultima.create();
+                        ultima.show();
+
+                    }
+                });
+
+                editar.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        db.delete("mensages", "_id=?", new String[]{"1"});
+                        mensagens.remove(null);
+                        adapter.notifyDataSetChanged();
+                        listView.setAdapter(adapter);
+                    }
+                });
+                editar.create();
+                editar.show();
+
+                return false;
+            }
+        });
+
     }
 }

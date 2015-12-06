@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/text_mensage"
+        android:id="@+id/pergunta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/new_edit_text"
+        android:layout_alignBaseline="@+id/new_text"
         android:layout_alignParentLeft="true"
-        android:text="Mensagem" />
+            android:text="Mensagem" />
 
     <EditText
-        android:id="@+id/new_edit_text"
+        android:id="@+id/new_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dip"
-        android:layout_toRightOf="@+id/text_mensage"
-        android:inputType="textAutoCorrect" />
+        android:layout_marginTop="20dip"
+        android:layout_toRightOf="@+id/pergunta"
+        android:hint="Digite uma nova mensagem" />
 
 
 </RelativeLayout>
