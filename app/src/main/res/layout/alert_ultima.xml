@@ -9,15 +9,18 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/new_text"
         android:layout_alignParentLeft="true"
-            android:text="Mensagem" />
+        android:text="Mensagem "
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/new_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
+        android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/pergunta"
-        android:hint="Digite uma nova mensagem" />
+        android:hint="@string/hint1" />
 
 
 </RelativeLayout>

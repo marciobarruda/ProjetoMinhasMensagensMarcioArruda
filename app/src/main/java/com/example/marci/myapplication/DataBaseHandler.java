@@ -31,4 +31,5 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MENSAGES);
         onCreate(db);
     }
+    
 }

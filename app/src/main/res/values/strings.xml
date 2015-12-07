@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Minhas Mensagens</string>
+    <string name="hint1"><i>Digite a nova mensagem</i></string>
+
 </resources>

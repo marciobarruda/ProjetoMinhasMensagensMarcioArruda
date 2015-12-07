@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
             texto = c.getString(1);
             mensagens.add(texto);
         }
+        c.close();
+
         listView.setAdapter(adapter);
 
         text_mensage = (TextView) findViewById(R.id.text_mensage);
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, final long id) {
 
                 AlertDialog.Builder editar = new AlertDialog.Builder(MainActivity.this);
                 editar.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
@@ -150,11 +152,15 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
+                                long id = position + 1;
+                                String _id = String.valueOf(id);
+                                _id.replaceAll("", " ");
                                 String nova = edit_mensagem.getText().toString();
+
                                 ContentValues values = new ContentValues();
                                 values.put("mensage", nova);
-                                db.update("mensages", values, null, new String[]{});
-                                mensagens.add(nova);
+                                db.update("mensages", values, "_id=?", new String[]{_id});
+
 
                                 adapter.notifyDataSetChanged();
                                 listView.setAdapter(adapter);
@@ -162,7 +168,10 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "A MENSAGEM: " + nova + " FOI GRAVADA COM SUCESSO!", Toast.LENGTH_SHORT).show();
                             }
                         });
-                        ultima.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+                        ultima.setNegativeButton("Cancelar", new DialogInterface.OnClickListener()
+
+                        {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -174,12 +183,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                editar.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                editar.setNegativeButton("Delete", new DialogInterface.OnClickListener()
+
+                {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        db.delete("mensages", "_id=?", new String[]{"1"});
-                        mensagens.remove(null);
+                        /*long id = position + 1;
+                        String _id = String.valueOf(id);
+                        _id.replaceAll("", " ");*/
+
+                        db.delete("mensages", "_id=?", new String[]{"?"});
+
+
                         adapter.notifyDataSetChanged();
                         listView.setAdapter(adapter);
                     }
@@ -187,9 +203,10 @@ public class MainActivity extends AppCompatActivity {
                 editar.create();
                 editar.show();
 
-                return false;
+                return true;
             }
         });
 
     }
+
 }
