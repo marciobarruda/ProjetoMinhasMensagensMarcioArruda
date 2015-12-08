@@ -7,10 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.CharacterPickerDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
     ListView listView;
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Cursor c;
     ArrayAdapter<String> adapter;
     SQLiteDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             texto = c.getString(1);
             mensagens.add(texto);
         }
-        c.close();
+        //c.close();
 
         listView.setAdapter(adapter);
 
@@ -133,10 +133,11 @@ public class MainActivity extends AppCompatActivity {
 
 
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, final long id) {
+            public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, final long id) {
 
                 AlertDialog.Builder editar = new AlertDialog.Builder(MainActivity.this);
                 editar.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -149,25 +150,30 @@ public class MainActivity extends AppCompatActivity {
                         ultima.setView(textEntryView);
 
                         ultima.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                long id = position + 1;
-                                String _id = String.valueOf(id);
-                                _id.replaceAll("", " ");
-                                String nova = edit_mensagem.getText().toString();
 
-                                ContentValues values = new ContentValues();
-                                values.put("mensage", nova);
-                                db.update("mensages", values, "_id=?", new String[]{_id});
+                                String click = parent.getAdapter().getItem(position).toString();
+                                String novo;
 
+                                novo = edit_mensagem.getText().toString();
+                                ContentValues valores = new ContentValues();
+                                valores.put("mensage", novo);
+                                db.update("mensages", valores, "mensage=?", new String[]{click});
 
+                                mensagens.set(position, novo);
                                 adapter.notifyDataSetChanged();
                                 listView.setAdapter(adapter);
 
-                                Toast.makeText(MainActivity.this, "A MENSAGEM: " + nova + " FOI GRAVADA COM SUCESSO!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "A MENSAGEM FOI GRAVADA COM SUCESSO!", Toast.LENGTH_SHORT).show();
+
                             }
+
                         });
+
 
                         ultima.setNegativeButton("Cancelar", new DialogInterface.OnClickListener()
 
@@ -183,21 +189,30 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                editar.setNegativeButton("Delete", new DialogInterface.OnClickListener()
-
-                {
+                editar.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        /*long id = position + 1;
-                        String _id = String.valueOf(id);
-                        _id.replaceAll("", " ");*/
+                        String clicked = parent.getAdapter().getItem(position).toString();
 
-                        db.delete("mensages", "_id=?", new String[]{"?"});
+                        db.delete("mensages", "mensage=?", new String[]{clicked});
 
+                        mensagens.remove(position);
 
                         adapter.notifyDataSetChanged();
                         listView.setAdapter(adapter);
+
+
+
+                      /*  AlertDialog.Builder teste = new AlertDialog.Builder(MainActivity.this);
+                        LayoutInflater factory = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        final View textEntryView = factory.inflate(R.layout.edit_alert, null);
+                        final Button editar = (Button) textEntryView.findViewById(R.id.button_editar);
+                        final Button delete = (Button) textEntryView.findViewById(R.id.button_deletar);
+                        teste.setView(textEntryView);
+                        teste.create();
+                        teste.show();*/
+
                     }
                 });
                 editar.create();
@@ -206,7 +221,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
 }
+
+
