@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listview);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, mensagens);
+
         db = new DataBaseHandler(MainActivity.this).getWritableDatabase();
         c = db.query("mensages", new String[]{"_id", "mensage"}, null, null, null, null, null);
         c.moveToFirst();
@@ -50,11 +51,9 @@ public class MainActivity extends AppCompatActivity {
             texto = c.getString(1);
             mensagens.add(texto);
         }
-        //c.close();
 
         listView.setAdapter(adapter);
 
-        text_mensage = (TextView) findViewById(R.id.text_mensage);
 
         newMensage = (Button) findViewById(R.id.new_mensage);
         newMensage.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
                         ContentValues values = new ContentValues();
                         values.put("mensage", texto);
                         db.insert("mensages", null, values);
-                        mensagens.add(texto);
 
+                        mensagens.add(texto);
                         adapter.notifyDataSetChanged();
                         listView.setAdapter(adapter);
 
@@ -121,8 +120,10 @@ public class MainActivity extends AppCompatActivity {
 
                 enviar.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+
                     }
                 });
+
                 enviar.create();
                 enviar.show();
 

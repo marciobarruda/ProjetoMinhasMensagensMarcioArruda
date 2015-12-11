@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="150dip"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingBottom="16dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.marci.myapplication.Login">
+    tools:context="com.example.marci.myapplication.ActivityLogin">
 
-    <EditText
-        android:id="@+id/editTextLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Login" />
 
-    <EditText
-        android:id="@+id/editTextSenha"
+    <ListView
+        android:id="@+id/listaLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="textPassword" />
+        android:layout_height="0dip"
+        android:layout_weight="6"
+        android:longClickable="true"></ListView>
 
     <Button
+        android:id="@+id/new_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickEntrar"
-        android:text="Entrar" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/listLogin"
+        android:background="@drawable/screen_border"
+        android:text="Cadastrar novo usuário" />
+
 
 
 </LinearLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editUser"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:text="Usuário" />
+
+    <EditText
+        android:id="@+id/editUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:layout_toEndOf="@+id/confsenha"
+        android:layout_toRightOf="@+id/confsenha"
+        android:hint="Digite um nome de usuário"
+        android:textSize="15sp"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/txtsenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editSenha"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/nome"
+        android:layout_marginLeft="10dp"
+        android:text="Senha" />
+
+
+    <EditText
+        android:id="@+id/editSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editSenha2"
+        android:layout_alignStart="@+id/editSenha2"
+        android:layout_below="@+id/editUser"
+        android:layout_marginTop="10dp"
+        android:hint="Informe senha de até 5 dígitos"
+        android:maxLength="5"
+        android:password="true"
+        android:textSize="15sp"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/confsenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editSenha2"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtsenha"
+        android:layout_marginLeft="10dp"
+        android:text="Confirmação" />
+
+
+    <EditText
+        android:id="@+id/editSenha2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editSenha"
+        android:layout_marginTop="10dip"
+        android:layout_toRightOf="@+id/confsenha"
+        android:hint="Confirme a senha"
+        android:maxLength="5"
+        android:password="true"
+        android:textSize="15sp"
+        android:typeface="sans" />
+
+
+</RelativeLayout>
