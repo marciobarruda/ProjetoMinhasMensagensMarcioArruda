@@ -42,7 +42,7 @@
         android:layout_alignStart="@+id/editSenha2"
         android:layout_below="@+id/editUser"
         android:layout_marginTop="10dp"
-        android:hint="Informe senha de até 5 dígitos"
+        android:hint="Informe senha com 5 dígitos"
         android:maxLength="5"
         android:password="true"
         android:textSize="15sp"

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class ActivityLogin extends Activity {
 
     ListView listLogin;
-    String login;
+    String user;
     Button newUser;
     ArrayList<String> loginArrayList = new ArrayList<String>();
     ArrayAdapter<String> adapter;
@@ -42,14 +42,15 @@ public class ActivityLogin extends Activity {
         adapter = new ArrayAdapter<String>(ActivityLogin.this, android.R.layout.simple_list_item_1, android.R.id.text1, loginArrayList);
 
         db = new DataBaseLogin(ActivityLogin.this).getWritableDatabase();
-        cursor = db.query("loginTable", new String[]{"_id", "username", "password"}, null, null, null, null, null);
+        cursor = db.query("tabela", null, null, null, null, null, null);
         cursor.moveToFirst();
 
         while (cursor.moveToNext()) {
-           // String id = cursor.getString(0);
-            login = cursor.getString(1);
-            loginArrayList.add(login);
+            String id = cursor.getString(0);
+            user = cursor.getString(1);
+            loginArrayList.add(user);
         }
+        cursor.close();
 
         listLogin.setAdapter(adapter);
 
@@ -71,24 +72,36 @@ public class ActivityLogin extends Activity {
                 cadastrar.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String user = editUser.getText().toString();
+                        user = editUser.getText().toString();
                         String senha = editSenha.getText().toString();
                         String confSenha = editConfSenha.getText().toString();
-
                         ContentValues valor = new ContentValues();
-                        if (senha.equals(confSenha)) {
+
+                        if (confSenha.equals(senha)) {
+
+                            long inserir;
+
                             valor.put("username", user);
-                            valor.put("password", confSenha);
-                            db.insert("loginTable", null, valor);
+                            valor.put("password", senha);
+
+                            inserir = db.insert("tabela", null, valor);
+                            db.close();
+
+                            if (inserir == -1)
+                                Toast.makeText(ActivityLogin.this, "Login não cadastrado", Toast.LENGTH_SHORT).show();
+
+                            else
+                                Toast.makeText(ActivityLogin.this, "Login cadastrado", Toast.LENGTH_SHORT).show();
 
                             loginArrayList.add(user);
                             adapter.notifyDataSetChanged();
                             listLogin.setAdapter(adapter);
 
-                        } else {
+                        /* else
                             Toast.makeText(ActivityLogin.this, "As senhas não conferem. Login não cadastrado", Toast.LENGTH_SHORT).show();
-                        }
+                            */
 
+                        }
                     }
                 });
 
@@ -123,12 +136,12 @@ public class ActivityLogin extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         String usuarioLogar = userLogar.getText().toString();
-                        usuarioLogar = parent.getAdapter().getItem(position).toString();
+                        //usuarioLogar = parent.getAdapter().getItem(position).toString();
 
                         String senhaLogar = editSenhaLogar.getText().toString();
 
                         db = new DataBaseLogin(ActivityLogin.this).getWritableDatabase();
-                        Cursor cu = db.query("loginTable", null, null, null, null, null, null);
+                        Cursor cu = db.query("tabela", null, null, null, null, null, null);
 
                         while (cu.moveToNext()) {
 
@@ -137,7 +150,7 @@ public class ActivityLogin extends Activity {
 
                                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(i);
-
+                                    cu.close();
                                 }
                             }
                         }

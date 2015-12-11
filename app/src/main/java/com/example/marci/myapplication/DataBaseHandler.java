@@ -32,31 +32,4 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-   /*public boolean insertData(String mensage) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, mensage);
-        long result = db.insert(TABLE_NAME, null, contentValues);
-        if (result == -1) {
-            return false;
-        } else
-            return true;
-
-    }
-
-    public Cursor getAllData() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor c = db.rawQuery("select * from " + TABLE_NAME, null);
-        return c;
-
-    }
-
-    public boolean UpdateData(String id, String mensage) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1, id);
-        contentValues.put(COL_2, mensage);
-        db.update(TABLE_NAME, contentValues, "_id=?", new String[]{id});
-        return true;
-    }*/
-}
+  }

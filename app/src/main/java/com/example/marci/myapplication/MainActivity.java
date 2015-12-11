@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-
         newMensage = (Button) findViewById(R.id.new_mensage);
         newMensage.setOnClickListener(new View.OnClickListener() {
             @Override

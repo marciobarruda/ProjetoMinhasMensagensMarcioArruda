@@ -16,8 +16,10 @@
         android:id="@+id/userLogar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dip"
         android:layout_marginTop="30dip"
-        android:layout_toRightOf="@+id/textName"
+        android:layout_toEndOf="@+id/textSenha"
+        android:layout_toRightOf="@+id/textSenha"
         android:hint="Informe o usuário"
         android:inputType="textAutoCorrect"
         android:textSize="15sp"
@@ -36,12 +38,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/userLogar"
+        android:layout_marginStart="20dip"
         android:layout_marginTop="30dip"
-        android:layout_toRightOf="@+id/textName"
+        android:layout_toEndOf="@+id/textSenha"
+        android:layout_toRightOf="@+id/textSenha"
         android:hint="Informe a senha"
         android:inputType="textAutoCorrect"
         android:maxLength="5"
         android:password="true"
         android:textSize="15sp"
         android:typeface="sans" />
+
+
 </RelativeLayout>
+
