@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <EditText
         android:id="@+id/editUsuario"
         android:layout_width="wrap_content"
@@ -10,31 +11,34 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Usuário"
-        android:inputType="textEmailAddress" >
+        android:hint="@string/usuario"
+        android:inputType="textEmailAddress">
 
         <requestFocus />
     </EditText>
 
     <EditText
-        android:id="@+id/editSenha"
+        android:id="@+id/editPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editUsuario"
         android:layout_below="@+id/editUsuario"
         android:layout_marginTop="33dp"
         android:ems="10"
-        android:hint="Senha"
+        android:hint="@string/senha"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/btnValidar"
+
+    <EditText
+        android:id="@+id/editConfPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editSenha"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
-        android:onClick="validar"
-        android:text="Validar" />
+        android:layout_alignLeft="@+id/editUsuario"
+        android:layout_below="@+id/editPassword"
+        android:layout_marginTop="33dp"
+        android:ems="10"
+        android:hint="@string/confirmar"
+        android:inputType="textPassword" />
+
 
 </RelativeLayout>

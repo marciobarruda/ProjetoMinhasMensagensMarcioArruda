@@ -1,6 +1,9 @@
-package com.example.marci.myapplication;
+package com.example.marci.myapplication.datasource;
 
 import android.content.Context;
+
+import com.example.marci.myapplication.dao.UserDAO;
+import com.example.marci.myapplication.model.User;
 
 import java.util.List;
 
@@ -26,7 +29,6 @@ public class UserController {
     public void update(User user) throws Exception {
         userDAO.update(user);
     }
-
     public List<User> findAll() throws Exception {
         return userDAO.findAll();
     }
@@ -38,10 +40,7 @@ public class UserController {
         }
         String informado = usuario + senha;
         String esperado = user.getUsuario() + user.getSenha();
-        if (informado.equals(esperado)) {
-            return true;
-        }
-        return false;
+        return informado.equals(esperado);
 
     }
 

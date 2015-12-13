@@ -1,5 +1,28 @@
 <resources>
     <string name="app_name">Minhas Mensagens</string>
-    <string name="hint1"><i>Digite a nova mensagem</i></string>
+    <string name="hint_mensagem">Digite uma mensagem</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="cadastrar_login">Cadastrar Login</string>
+    <string name="mensagem">Mensagem</string>
+    <string name="usuario">Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="logar">Logar</string>
+    <string name="new_mensagem">Nova Mensagem</string>
+    <string name="enviar">Enviar mensagem</string>
+    <string name="numero">Digite um número de telefone</string>
+    <string name="editar">Editar</string>
+    <string name="editar_mensagem">Editar mensagem</string>
+    <string name="delete">Delete</string>
+    <string name="confirmar">Confirme a Senha</string>
+    <string name="edit_mensagem">Digite a nova mensagem</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="ok">Ok</string>
+    <string name="gravada">A MENSAGEM FOI GRAVADA COM SUCESSO!</string>
+    <string name="verifique">Verifique usuário ou senha!</string>
+    <string name="validando">Erro ao validar usuário ou senha</string>
+    <string name="senhas_invalidas">As senhas não conferem</string>
+    <string name="tela_login">Tela de Login</string>
+    <string name="aplicacao">Mensagens</string>
+
 
 </resources>

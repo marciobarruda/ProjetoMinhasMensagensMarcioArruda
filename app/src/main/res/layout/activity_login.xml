@@ -1,7 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".model.ActivityLogin">
 
     <EditText
         android:id="@+id/editUsuario"
@@ -9,9 +16,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dip"
         android:ems="10"
-        android:hint="Usuário"
-        android:inputType="textEmailAddress" >
+        android:hint="@string/usuario"
+        android:inputType="textEmailAddress">
 
         <requestFocus />
     </EditText>
@@ -24,7 +32,7 @@
         android:layout_below="@+id/editUsuario"
         android:layout_marginTop="33dp"
         android:ems="10"
-        android:hint="Senha"
+        android:hint="@string/senha"
         android:inputType="textPassword" />
 
     <Button
@@ -32,9 +40,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editSenha"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dip"
         android:layout_marginTop="46dp"
         android:onClick="validar"
-        android:text="Validar" />
+        android:text="@string/logar">
+
+    </Button>
+
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editSenha"
+        android:layout_marginTop="46dp"
+        android:layout_toRightOf="@+id/btnValidar"
+        android:onClick="cadastrar"
+        android:text="@string/cadastrar" />
+
 
 </RelativeLayout>

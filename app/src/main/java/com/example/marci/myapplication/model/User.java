@@ -1,4 +1,4 @@
-package com.example.marci.myapplication;
+package com.example.marci.myapplication.model;
 
 
 public class User {
